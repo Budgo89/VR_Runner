@@ -10,9 +10,13 @@ namespace _root.Scripts
         [SerializeField] private List<Transform> _segments;
         [SerializeField] private float _minDistance;
         [SerializeField] private Transform _player;
+        [SerializeField] private PauseMenager _pauseMenager;
 
         private void Update()
         {
+            if (_pauseMenager.IsPause())
+                return;
+            
             Transform lastobj = _segments[_segments.Count - 1];
             float dis = Vector3.Distance(lastobj.position, _player.position);
 

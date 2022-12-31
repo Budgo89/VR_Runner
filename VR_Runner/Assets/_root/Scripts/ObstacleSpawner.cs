@@ -14,6 +14,8 @@ namespace _root.Scripts
 
         [SerializeField] private Vector2 _sergmentWidth;
 
+        [SerializeField] private PauseMenager _pauseMenager;
+
         private Transform _myTrans;
         private Vector3 _lastPos;
 
@@ -41,6 +43,9 @@ namespace _root.Scripts
 
         private void Update()
         {
+            if (_pauseMenager.IsPause())
+                return;
+            
             if (_myTrans.position.z > _lastPos.z + _spawnStep)
             {
                 _lastPos.z += _spawnStep;

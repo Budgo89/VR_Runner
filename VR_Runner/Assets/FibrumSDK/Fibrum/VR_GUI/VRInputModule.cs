@@ -49,7 +49,14 @@ public class VRInputModule : BaseInputModule {
 		
 	// the UI element to use for the cursor
 	public RectTransform cursor;
-		
+
+	/*protected override void Start()
+	{
+		base.Start();
+		var a = cursor.gameObject.GetComponent<RectTransform>();
+		a.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+	}*/
+
 	public bool ignoreInputsWhenLookAway = true;
 
 	private GameObject currentLook;
@@ -84,6 +91,10 @@ public class VRInputModule : BaseInputModule {
 
 		if( sim.enabled ) return;
 		if (cursor != null) {
+			
+			var a = cursor.gameObject.GetComponent<RectTransform>();
+			a.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+			
 			if (lookData.pointerCurrentRaycast.gameObject!=null) {
 				RectTransform draggingPlane = lookData.pointerCurrentRaycast.gameObject.GetComponent<RectTransform>();
 				Vector3 globalLookPos;
@@ -132,8 +143,11 @@ public class VRInputModule : BaseInputModule {
 		lookData.pressPosition = lookData.position;
 		lookData.pointerPressRaycast = lookData.pointerCurrentRaycast;
 		lookData.pointerPress = null;
-		if (currentLook != null) {
+		if (currentLook != null)
+		{
 			currentPressed = currentLook;
+
+			
 			GameObject newPressed = null;
 			newPressed = ExecuteEvents.ExecuteHierarchy (currentPressed, lookData, ExecuteEvents.pointerDownHandler);
 			if (newPressed == null) {
@@ -210,6 +224,8 @@ public class VRInputModule : BaseInputModule {
 				{
 					if(circleProgressBar!=null)
 					{
+						var a = circleProgressBar.GetComponent<RectTransform>();
+						a.localScale = new Vector3(0.03f, 0.03f, 0.03f);
 						RectTransform draggingPlane = lookData.pointerCurrentRaycast.gameObject.GetComponent<RectTransform>();
 						Vector3 globalLookPos;
 						if (RectTransformUtility.ScreenPointToWorldPointInRectangle(draggingPlane, lookData.position, lookData.enterEventCamera, out globalLookPos))

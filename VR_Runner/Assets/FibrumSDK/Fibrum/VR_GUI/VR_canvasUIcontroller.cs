@@ -38,5 +38,5 @@ public class VR_canvasUIcontroller : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Invoke("UpdatesSceneCanvases",0f);
-	}
+		}
 }

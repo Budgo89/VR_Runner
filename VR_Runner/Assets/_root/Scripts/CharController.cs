@@ -9,6 +9,7 @@ namespace _root.Scripts
         [SerializeField] private float _speed = 6;
         [SerializeField] private float _sideSpeed = 2;
         [SerializeField] private float _deadZoneRotation = 10;
+        [SerializeField] private PauseMenager _pauseMenager;
 
         private Rigidbody _player;
 
@@ -19,6 +20,9 @@ namespace _root.Scripts
 
         private void Update()
         {
+            if (_pauseMenager.IsPause())
+                return;
+            
             Vector3 dir = _player.velocity;
             if (_camera.transform.rotation.eulerAngles.z > _deadZoneRotation &&
                 _camera.transform.rotation.eulerAngles.z <= 180)
@@ -33,7 +37,7 @@ namespace _root.Scripts
             }
 
 #if UNITY_EDITOR
-            dir.x = Input.GetAxis("Horizontal") * _sideSpeed;
+           // dir.x = Input.GetAxis("Horizontal") * _sideSpeed;
 #endif
 
             dir.z = _speed;
